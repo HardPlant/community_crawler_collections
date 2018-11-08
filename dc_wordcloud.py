@@ -25,26 +25,12 @@ def plot(text):
     plt.show()
 
 def filter_title(words):
-    words = re.sub('NoArticle', '', words)
-    words = re.sub('근데', '', words)   
-    words = re.sub('너무', '', words)   
-    words = re.sub('진짜', '', words)   
-    words = re.sub('시발', '', words)   
-    words = re.sub('씨발', '', words)   
-    words = re.sub('아니', '', words)   
-    words = re.sub('이거', '', words)   
-    words = re.sub('[ミリシタ]', '', words)   
-    words = re.sub('PSTheater', '', words)   
-    words = re.sub('씹타갤', '', words)   
-    words = re.sub('시타갤', '', words)   
-    words = re.sub('존나', '', words)   
-    words = re.sub('현황', '', words)   
-    words = re.sub('제일', '', words)   
-    words = re.sub('씹타', '', words)
-    words = re.sub('그냥', '', words)
-    words = re.sub('그래서', '', words)
-    words = re.sub('무엇', '', words)
-    
+    filters = ['NoArticle','근데','너무','진짜','시발','씨발','아니','이거',\
+    '[ミリシタ]','PSTheater','씹타갤','시타갤','존나','현황','제일','씹타','그냥',\
+    '그래서','무엇', '때문', '씨이바']
+
+    for filt in filters:
+        words = re.sub(filt, '', words)
     
     return words
 
@@ -98,5 +84,5 @@ def main(path,is_DB=False, start=0):
     plot(words)
 
 if __name__ == "__main__":
-    main('theaterdays', start=1050226)
+    main('theaterdays', start=1051620)
 #    main('programming', 9204000)
