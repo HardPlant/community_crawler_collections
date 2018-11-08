@@ -1,0 +1,7 @@
+requests==2.18.4
+konlpy==0.5.1
+matplotlib==2.2.3
+beautifulsoup4==4.6.3
+python_dateutil==2.7.5
+docker_py==1.10.6
+wordcloud==1.5.0
