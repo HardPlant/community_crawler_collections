@@ -23,9 +23,13 @@ def fetch(URL):
         'Connection':"keep-alive",
         'Upgrade-Insecure-Requests': "1"
     }
-
-    req = requests.get(URL, headers)
-    content = req
+    try:
+        req = requests.get(URL, headers, timeout=3)
+        content = req
+    except:
+        time.sleep(3)
+        return fetch(URL)
+        
     time.sleep(0.05)
     return content
 

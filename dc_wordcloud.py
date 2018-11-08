@@ -14,14 +14,14 @@ def make_wordcloud(text):
     return WordCloud(\
         font_path="/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"\
         ,background_color="white" \
-    ).generate_from_text(text)
+    ,width=1280, height=640).generate_from_text(text)
 
 def plot(text):
     wordcloud = make_wordcloud(text)
     plt.figure()
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
-    plt.savefig(str(datetime.datetime.now())+".png", quality=100, pad_inches=0)
+    plt.savefig(str(datetime.datetime.now())+".png", quality=100, pad_inches=0, bbox_inches='tight')
     plt.show()
 
 def filter_title(words):
@@ -98,5 +98,5 @@ def main(path,is_DB=False, start=0):
     plot(words)
 
 if __name__ == "__main__":
-#    main('theaterdays', start=1048461)
-    main('programming', 9204000)
+    main('theaterdays', start=1050226)
+#    main('programming', 9204000)
