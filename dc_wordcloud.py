@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import datetime
 import os
 import re
+from PIL import Image
+import numpy as np
 from konlpy.tag import Kkma
 
 kkma=Kkma()
@@ -10,14 +12,21 @@ kkma=Kkma()
 import crawl_logger
 from dc_crawler import DCText
 
-def make_wordcloud(text):
+def get_mask(logo):
+    return np.array(Image.open(logo))
+
+def make_wordcloud(text, logo):
+    if logo:
+        mask = get_mask(logo)
+    
     return WordCloud(\
         font_path="/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"\
         ,background_color="white" \
-    ,width=1280, height=640).generate_from_text(text)
+    ,width=1280, height=640, mask=mask).generate_from_text(text)
 
-def plot(text):
-    wordcloud = make_wordcloud(text)
+def plot(text, logo):
+    wordcloud = make_wordcloud(text, logo)
+
     plt.figure()
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
@@ -63,7 +72,7 @@ def filter_it(words):
 
     return words
 
-def main(path,is_DB=False, start=0):
+def main(path,is_DB=False, start=0, logo=None):
     words = ""
     for file in os.listdir(path):
         if start:
@@ -81,8 +90,8 @@ def main(path,is_DB=False, start=0):
     
     words = filter_it(words)
 
-    plot(words)
+    plot(words, logo)
 
 if __name__ == "__main__":
-    main('theaterdays', start=1051620)
+    main('theaterdays', start=1052000, logo="logo.jpg")
 #    main('programming', 9204000)
